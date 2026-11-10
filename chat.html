@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ngobrol Bareng | Reyvan Maulana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <b><a href="index.html" style="text-decoration:none">Reyvan Maulana</a></b>
+      <div class="menu">
+        <a href="index.html#about">Tentang</a>
+        <a href="index.html#karya">Karya</a>
+        <a href="index.html#kontak">Kontak</a>
+        <a href="chat.html" class="active">Chat</a>
+        <button id="theme-toggle" aria-label="Ganti tema">◐</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="chat">
+    <div class="feat-head">
+      <h1 class="feat">Ngobrol Bareng</h1>
+      <p>Asisten otomatis Reyvan siap diajak ngobrol soal musik &amp; DJ, kopi, dan belajar coding.</p>
+    </div>
+
+    <div class="chat-box">
+      <div id="msgs" class="msgs" aria-live="polite"></div>
+      <div id="chips" class="chips"></div>
+      <form id="form" class="chat-form" autocomplete="off">
+        <input id="input" type="text" placeholder="Tulis pesan…" aria-label="Pesan" maxlength="300">
+        <button type="submit" class="pill main">Kirim</button>
+      </form>
+    </div>
+    <p class="note">Ini bot berbasis aturan, bukan Reyvan langsung. Jawabannya terbatas pada topik di atas. Untuk hal lain, hubungi lewat <a href="index.html#kontak">halaman kontak</a>.</p>
+  </main>
+
+  <script src="chat.js"></script>
+</body>
+</html>
