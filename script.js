@@ -1,132 +1,176 @@
-// ====== DATA: edit bagian ini saja untuk mengisi konten ======
-const profile = { email: "reyvan@contoh.com" };
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-const ART = {
-  kasir: `<svg viewBox="0 0 300 330" preserveAspectRatio="xMidYMid slice"><rect width="300" height="330" fill="#3b82ff"/><path d="M-20 260 L120 -20 L200 -20 L60 330Z" fill="#f2e8c9"/><path d="M150 350 L300 60 L340 60 L340 350Z" fill="#ffa400"/><g transform="rotate(-8 150 170)"><rect x="70" y="70" width="110" height="170" rx="8" fill="#fff"/><g fill="#d9d9d9"><rect x="84" y="92" width="70" height="8" rx="4"/><rect x="84" y="112" width="52" height="8" rx="4"/><rect x="84" y="132" width="76" height="8" rx="4"/><rect x="84" y="152" width="44" height="8" rx="4"/></g><rect x="84" y="190" width="82" height="26" rx="6" fill="#3fbf86"/></g><g transform="rotate(6 190 220)"><rect x="120" y="170" width="140" height="100" rx="14" fill="#1c1b19"/><rect x="134" y="182" width="112" height="30" rx="6" fill="#b6ff3c"/><g fill="#ef5b4b"><circle cx="150" cy="236" r="9"/><circle cx="180" cy="236" r="9"/></g><g fill="#f4c542"><circle cx="210" cy="236" r="9"/><circle cx="240" cy="236" r="9"/></g></g><circle cx="60" cy="280" r="20" fill="#f4c542" stroke="#1c1b19" stroke-width="4"/><circle cx="238" cy="70" r="14" fill="#f4c542" stroke="#1c1b19" stroke-width="4"/></svg>`,
-  mix: `<svg viewBox="0 0 300 330" preserveAspectRatio="xMidYMid slice"><rect width="300" height="330" fill="#9b6cf0"/><path d="M-20 60 L140 -20 L200 -20 L40 100Z" fill="#f4c542"/><path d="M180 340 L340 220 L340 340Z" fill="#3fbf86"/><g transform="rotate(-6 150 170)"><rect x="25" y="85" width="250" height="150" rx="16" fill="#1c1b19"/><g><circle cx="85" cy="160" r="48" fill="#2d2b28"/><circle cx="85" cy="160" r="34" fill="none" stroke="#555" stroke-width="2"/><circle cx="85" cy="160" r="18" fill="#b6ff3c"/><circle cx="85" cy="160" r="4" fill="#1c1b19"/></g><g><circle cx="215" cy="160" r="48" fill="#2d2b28"/><circle cx="215" cy="160" r="34" fill="none" stroke="#555" stroke-width="2"/><circle cx="215" cy="160" r="18" fill="#ef5b4b"/><circle cx="215" cy="160" r="4" fill="#1c1b19"/></g><rect x="136" y="105" width="28" height="110" rx="6" fill="#4a4743"/><rect x="144" y="120" width="12" height="18" rx="3" fill="#f4c542"/><rect x="144" y="172" width="12" height="18" rx="3" fill="#3b82ff"/></g><g fill="#fff"><rect x="40" y="258" width="10" height="30" rx="5"/><rect x="58" y="248" width="10" height="50" rx="5"/><rect x="76" y="262" width="10" height="26" rx="5"/><rect x="214" y="252" width="10" height="42" rx="5"/><rect x="232" y="262" width="10" height="26" rx="5"/><rect x="250" y="246" width="10" height="52" rx="5"/></g></svg>`
-};
+  // ====== DATA: edit bagian ini untuk mengisi konten ======
+  const projects = [
+    { tag: "Proyek Web", title: "Web Kasir", desc: "Aplikasi web untuk mencatat transaksi dan menghitung pembayaran.", color: "#7a4a24", img: "kasir.jpg", url: "#" },
+    { tag: "Aplikasi", title: "Aplikasi Mix Music", desc: "Alat mixing musik seperti DJ untuk memadukan lagu.", color: "#1c1b19", img: "mix.jpg", pos: "center", url: "#" },
+  ];
 
-const projects = [
-  { title: "Web Kasir", desc: "Aplikasi web untuk mencatat transaksi dan menghitung pembayaran", color: "#3b82ff", art: ART.kasir, url: "#" },
-  { title: "Aplikasi Mix Music", desc: "Alat mixing musik seperti DJ untuk memadukan lagu", color: "#9b6cf0", art: ART.mix, url: "#" },
-];
-
-const experience = [
-  { year: "Pendidikan", company: "SMKS Cendika Bangsa", role: "Siswa", note: "Belajar dan membangun proyek web serta aplikasi." },
-  { year: "Hotel", company: "Waiter Hotel", role: "Waiter", note: "Melayani tamu dengan ramah dan bekerja cepat dalam tim." },
-  { year: "Kafe", company: "Barista Kafe", role: "Barista", note: "Meracik minuman, melayani pelanggan, dan menjaga kualitas." },
-];
-
-const links = [
-  { label: profile.email, url: "mailto:" + profile.email, main: true },
-  { label: "Instagram", url: "#" },
-  { label: "GitHub", url: "#" },
-  { label: "Unduh CV", url: "#" },
-];
-
-const fun = [
-  { topic: "musik", title: "Musik & DJ", text: "Suka ngobrol soal lagu, remix, dan teknik mixing." },
-  { topic: "kopi", title: "Kopi", text: "Pernah jadi barista, jadi senang bahas racikan kopi." },
-  { topic: "coding", title: "Belajar coding", text: "Terbuka untuk belajar dan bikin proyek bareng." },
-];
-
-// ====== RENDER ======
-const $ = (id) => document.getElementById(id);
-const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-
-// ====== CAROUSEL KARYA ======
-$("projects").innerHTML = `
-  <div class="stage" id="stage">${projects.map((p, i) =>
-    `<div class="pcard" data-i="${i}" style="--bg-c:${p.color}" role="button" aria-label="${esc(p.title)}">${p.art}</div>`).join("")}</div>
-  <div class="car-title"><span class="pill-g" id="car-title"></span></div>`;
-
-const cards = [...document.querySelectorAll(".pcard")];
-let active = 0;
-function showCard() {
-  cards.forEach((el, i) => {
-    const off = i - active;
-    const rot = off === 0 ? -3 : off * 13;
-    el.style.transform = `translate(calc(-50% + ${off * 108}%), -50%) rotate(${rot}deg) scale(${off === 0 ? 1 : 0.88})`;
-    el.style.zIndex = 10 - Math.abs(off);
-    el.style.opacity = Math.abs(off) > 1 ? 0 : 1;
-  });
-  $("car-title").textContent = projects[active].title;
-}
-const go = (d) => { active = Math.min(projects.length - 1, Math.max(0, active + d)); showCard(); };
-document.addEventListener("keydown", (e) => { if (e.key === "ArrowLeft") go(-1); if (e.key === "ArrowRight") go(1); });
-// Geser (swipe/drag) untuk ganti kartu
-let startX = null, moved = false;
-const stageEl = $("stage");
-stageEl.addEventListener("pointerdown", (e) => { startX = e.clientX; moved = false; });
-stageEl.addEventListener("pointerup", (e) => {
-  if (startX !== null && Math.abs(e.clientX - startX) > 40) { moved = true; go(e.clientX < startX ? 1 : -1); }
-  startX = null;
-});
-stageEl.addEventListener("pointercancel", () => (startX = null));
-// Klik kartu samping: pindah ke kartu itu (diabaikan jika baru digeser)
-cards.forEach((el, i) => el.addEventListener("click", () => {
-  if (moved) { moved = false; return; }
-  active = i; showCard();
-}));
-showCard();
-
-$("experience").innerHTML = experience.map((e) => `
-  <div class="exp">
-    <span>${esc(e.year)}</span>
-    <div><h3>${esc(e.company)}</h3><p>${esc(e.role)}. ${esc(e.note)}</p></div>
-  </div>`).join("");
-
-$("links").innerHTML = links.map((l) =>
-  `<a class="pill${l.main ? " main" : ""}" href="${esc(l.url)}">${esc(l.label)}</a>`).join("");
-
-$("fun").innerHTML = fun.map((f) =>
-  `<a class="fc" href="chat.html?topik=${f.topic}"><h3>${esc(f.title)}</h3><p>${esc(f.text)}</p><span>Ngobrol sama bot →</span></a>`).join("");
-
-$("year").textContent = new Date().getFullYear();
-
-// ====== TEMA (terang/gelap) ======
-const root = document.documentElement;
-try {
-  const saved = localStorage.getItem("theme");
-  if (saved) root.dataset.theme = saved;
-} catch (e) {}
-
-$("theme-toggle").addEventListener("click", () => {
-  const isDark = root.dataset.theme
-    ? root.dataset.theme === "dark"
-    : matchMedia("(prefers-color-scheme: dark)").matches;
-  const next = isDark ? "light" : "dark";
-  root.dataset.theme = next;
-  try { localStorage.setItem("theme", next); } catch (e) {}
-});
-
-// ====== SALIN EMAIL ======
-$("copy-email").addEventListener("click", async (e) => {
-  const btn = e.currentTarget;
-  try {
-    await navigator.clipboard.writeText(profile.email);
-    btn.textContent = "Tersalin ✓";
-  } catch (err) {
-    btn.textContent = profile.email;
+  // ====== DAFTAR PROYEK ======
+  const list = $("projects");
+  if (list) {
+    list.innerHTML = projects.map((p) => {
+      const tag = p.url === "#" ? "div" : "a";
+      const href = p.url === "#" ? "" : ` href="${esc(p.url)}"`;
+      return `<${tag} class="pj"${href} style="--c:${p.color}">
+        <div class="pj-art${p.img ? " shot" : ""}">${p.img ? `<img src="${esc(p.img)}" alt="Tampilan ${esc(p.title)}" loading="lazy"${p.pos ? ` style="object-position:${esc(p.pos)}"` : ""}>` : p.art}</div>
+        <div class="pj-info"><div><small>${esc(p.tag)}</small><h3>${esc(p.title)}</h3><p>${esc(p.desc)}</p></div><span class="arrow">→</span></div>
+      </${tag}>`;
+    }).join("");
   }
-  setTimeout(() => (btn.textContent = "Salin email"), 2000);
-});
 
-// ====== ANIMASI MUNCUL SAAT SCROLL ======
-const revealObs = new IntersectionObserver((entries) => {
-  entries.forEach((en) => {
-    if (en.isIntersecting) { en.target.classList.add("show"); revealObs.unobserve(en.target); }
-  });
-}, { threshold: 0.12 });
-document.querySelectorAll(".reveal").forEach((el) => revealObs.observe(el));
+  // ====== GALERI PENGALAMAN ======
+  // Taruh foto di folder "galeri/", lalu isi daftar photos, contoh:
+  // photos: [{ src: "galeri/hotel-1.jpg", cap: "Bertugas di restoran hotel" }, { src: "galeri/hotel-2.jpg" }]
+  // Selama photos masih kosong, galeri menampilkan kotak foto sementara.
+  const experiences = [
+    { title: "SMKS Cendika Bangsa", role: "Siswa", photos: [] },
+    { title: "Hotel", role: "Waiter", photos: [] },
+    { title: "Kafe", role: "Barista", photos: [] },
+  ];
 
-// ====== MENU AKTIF SESUAI SECTION ======
-const navLinks = document.querySelectorAll(".menu a");
-const navObs = new IntersectionObserver((entries) => {
-  entries.forEach((en) => {
-    if (en.isIntersecting) {
-      navLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id));
-    }
+  const tilesEl = $("tiles");
+  if (tilesEl) {
+    tilesEl.innerHTML = experiences.map((e, i) =>
+      `<button class="tile" data-i="${i}"><b>${esc(e.title)}</b><span>${esc(e.role)}</span><em>Lihat galeri →</em></button>`).join("");
+
+    const modal = document.createElement("div");
+    modal.className = "gal"; modal.hidden = true;
+    modal.innerHTML = `<div class="gal-panel" role="dialog" aria-modal="true" aria-labelledby="gal-title">
+      <div class="gal-head"><div><h3 id="gal-title"></h3><p id="gal-role"></p></div><button class="gal-x" id="gal-close" aria-label="Tutup galeri">✕</button></div>
+      <div class="gal-grid" id="gal-grid"></div></div>`;
+    const lb = document.createElement("div");
+    lb.className = "lb"; lb.hidden = true;
+    lb.innerHTML = `<button class="lb-x" aria-label="Tutup foto">✕</button><button class="lb-n prev" aria-label="Sebelumnya">‹</button>
+      <figure><img alt=""><figcaption></figcaption></figure><button class="lb-n next" aria-label="Berikutnya">›</button>`;
+    document.body.append(modal, lb);
+
+    const grid = $("gal-grid"), lbImg = lb.querySelector("img"), lbCap = lb.querySelector("figcaption");
+    let cur = [], idx = 0, lastBtn = null;
+
+    const openGal = (i, btn) => {
+      const e = experiences[i];
+      lastBtn = btn;
+      cur = e.photos.map((p) => (typeof p === "string" ? { src: p } : p));
+      if (!cur.length) cur = Array.from({ length: 6 }, (_, k) => ({ ph: true, cap: `Foto ${k + 1}` }));
+      $("gal-title").textContent = e.title;
+      $("gal-role").textContent = e.role;
+      grid.innerHTML = cur.map((p, k) => p.ph
+        ? `<div class="gal-item ph" style="--k:${k}">${esc(p.cap)}</div>`
+        : `<button class="gal-item" data-k="${k}"><img src="${esc(p.src)}" alt="${esc(p.cap || e.title)}" loading="lazy"></button>`).join("");
+      modal.hidden = false;
+      document.body.style.overflow = "hidden";
+      $("gal-close").focus();
+    };
+    const closeGal = () => { modal.hidden = true; document.body.style.overflow = ""; if (lastBtn) lastBtn.focus(); };
+    const showPhoto = (k) => {
+      idx = (k + cur.length) % cur.length;
+      lbImg.src = cur[idx].src; lbImg.alt = cur[idx].cap || "";
+      lbCap.textContent = cur[idx].cap || "";
+      lb.hidden = false;
+    };
+
+    tilesEl.addEventListener("click", (e) => { const b = e.target.closest(".tile"); if (b) openGal(+b.dataset.i, b); });
+    grid.addEventListener("click", (e) => { const b = e.target.closest("button.gal-item"); if (b) showPhoto(+b.dataset.k); });
+    $("gal-close").addEventListener("click", closeGal);
+    modal.addEventListener("click", (e) => { if (e.target === modal) closeGal(); });
+    lb.addEventListener("click", (e) => {
+      if (e.target.closest(".prev")) showPhoto(idx - 1);
+      else if (e.target.closest(".next")) showPhoto(idx + 1);
+      else if (e.target === lb || e.target.closest(".lb-x")) lb.hidden = true;
+    });
+    document.addEventListener("keydown", (e) => {
+      if (!lb.hidden) {
+        if (e.key === "Escape") lb.hidden = true;
+        if (e.key === "ArrowLeft") showPhoto(idx - 1);
+        if (e.key === "ArrowRight") showPhoto(idx + 1);
+      } else if (!modal.hidden && e.key === "Escape") closeGal();
+    });
+    let sx = null;
+    lb.addEventListener("pointerdown", (e) => (sx = e.clientX));
+    lb.addEventListener("pointerup", (e) => {
+      if (sx !== null && Math.abs(e.clientX - sx) > 50) showPhoto(idx + (e.clientX < sx ? 1 : -1));
+      sx = null;
+    });
+  }
+
+  // ====== IKON SOSIAL ======
+  // Ganti url dengan tautan akunmu. Selama masih "#", ikon tidak membuka apa-apa.
+  // WhatsApp: https://wa.me/62812xxxxxxx (nomor tanpa 0 di depan dan tanpa tanda +)
+  const socials = [
+    { name: "Instagram", url: "#", vb: "0 0 24 24", svg: `<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3"/>` },
+    { name: "GitHub", url: "https://github.com/r3v4n-web", vb: "0 0 16 16", svg: `<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>` },
+    { name: "LinkedIn", url: "#", vb: "0 0 24 24", svg: `<path d="M4.98 3.5a2.5 2.5 0 11-.01 5 2.5 2.5 0 01.01-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.54h.05c.53-1 1.82-2.05 3.75-2.05 4 0 4.75 2.63 4.75 6.05V21h-4v-4.95c0-1.18-.02-2.7-1.65-2.7-1.65 0-1.9 1.29-1.9 2.62V21h-4z"/>` },
+    { name: "TikTok", url: "#", vb: "0 0 24 24", svg: `<path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>` },
+    { name: "WhatsApp", url: "#", vb: "0 0 24 24", svg: `<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>` },
+  ];
+  const EMAIL = "r3v4nmaulana789@gmail.com";
+  const socialHTML = socials.map((s) =>
+    `<a href="${esc(s.url)}" aria-label="${esc(s.name)}" title="${esc(s.name)}"${s.url === "#" ? "" : ' target="_blank" rel="noopener"'}><svg viewBox="${s.vb}" fill="currentColor" aria-hidden="true">${s.svg}</svg></a>`).join("");
+  const socialEl = $("social");
+  if (socialEl) socialEl.innerHTML = socialHTML;
+  document.addEventListener("click", (e) => { if (e.target.closest('.social a[href="#"], .ct-soc a[href="#"]')) e.preventDefault(); });
+
+  // ====== POPUP KONTAK ======
+  const ct = document.createElement("div");
+  ct.className = "ct"; ct.hidden = true;
+  ct.innerHTML = `<div class="ct-panel" role="dialog" aria-modal="true" aria-labelledby="ct-title">
+    <button class="ct-x" aria-label="Tutup kontak">✕</button>
+    <p class="ct-lead">Terbuka untuk kolaborasi, belajar bareng, atau sekadar menyapa 😀</p>
+    <p class="ct-lead">Silakan hubungi aku lewat email atau media sosial di bawah ini.</p>
+    <h2 id="ct-title">Kontak</h2>
+    <div class="ct-row"><span>Email</span><div><a href="mailto:${EMAIL}">${EMAIL}</a></div></div>
+    <div class="ct-row"><span>Sekolah</span><div>SMKS Cendika Bangsa</div></div>
+    <div class="ct-row"><span>Sosial</span><div class="ct-soc">${socialHTML}</div></div>
+    <a class="ct-btn" href="mailto:${EMAIL}">Kirim email</a>
+  </div>`;
+  document.body.appendChild(ct);
+  let ctFrom = null;
+  const openCt = (from) => {
+    ctFrom = from; ct.hidden = false;
+    document.body.style.overflow = "hidden";
+    requestAnimationFrame(() => ct.classList.add("show"));
+    ct.querySelector(".ct-x").focus();
+  };
+  const closeCt = () => {
+    ct.classList.remove("show");
+    document.body.style.overflow = "";
+    setTimeout(() => { ct.hidden = true; }, 250);
+    if (ctFrom) ctFrom.focus();
+  };
+  document.querySelectorAll("[data-contact]").forEach((a) =>
+    a.addEventListener("click", (e) => { e.preventDefault(); openCt(a); }));
+  ct.addEventListener("click", (e) => { if (e.target === ct || e.target.closest(".ct-x")) closeCt(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !ct.hidden) closeCt(); });
+
+  // ====== TEMA TERANG/GELAP ======
+  const root = document.documentElement;
+  try { const t = localStorage.getItem("theme"); if (t) root.dataset.theme = t; } catch (e) {}
+  $("theme-toggle").addEventListener("click", () => {
+    const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
   });
-}, { rootMargin: "-40% 0px -55% 0px" });
-document.querySelectorAll("section[id]").forEach((s) => navObs.observe(s));
+
+  // ====== MENU HP ======
+  const burger = $("burger"), links = $("links");
+  burger.addEventListener("click", () => {
+    const open = links.classList.toggle("open");
+    burger.setAttribute("aria-expanded", open);
+  });
+  links.addEventListener("click", (e) => { if (e.target.closest("a")) links.classList.remove("open"); });
+
+  // ====== ANIMASI MUNCUL SAAT SCROLL ======
+  const obs = new IntersectionObserver((es) => es.forEach((en) => {
+    if (en.isIntersecting) { en.target.classList.add("show"); obs.unobserve(en.target); }
+  }), { threshold: 0.1 });
+  document.querySelectorAll(".rv").forEach((el) => obs.observe(el));
+
+  // ====== NAV BAYANGAN SAAT SCROLL + TAHUN ======
+  const top = document.querySelector(".top");
+  const onScroll = () => top.classList.toggle("scrolled", scrollY > 8);
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+  $("year").textContent = new Date().getFullYear();
+})();
