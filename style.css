@@ -42,6 +42,9 @@ h2.sec{font-size:13px;text-transform:uppercase;letter-spacing:.14em;color:var(--
 .pj-art{height:clamp(240px,42vw,400px);border-radius:24px;background:var(--c);display:flex;justify-content:center;overflow:hidden}
 .pj-art svg{height:100%;width:auto;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
 .pj-art.shot{display:block}
+.pj-art.fit{position:relative;display:flex;justify-content:center;background:#1c1b19}
+.pj-art.fit::before{content:"";position:absolute;inset:-40px;background:var(--bgi) center/cover;filter:blur(30px) brightness(.55)}
+.pj-art.fit img{position:relative;width:auto;max-width:100%;object-fit:contain}
 .pj-art img{width:100%;height:100%;object-fit:cover;object-position:top left;display:block;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
 .pj:hover .pj-art img{transform:scale(1.03)}
 .pj:hover .pj-art svg{transform:scale(1.05) rotate(-1deg)}
@@ -130,22 +133,20 @@ h1.big{font-size:clamp(34px,6vw,56px);margin-bottom:20px}
 @media(max-width:560px){.lb-n{position:absolute;bottom:20px}.lb-n.prev{left:20px}.lb-n.next{right:20px}.gal-grid{grid-template-columns:repeat(2,1fr)}}
 
 /* ===== Popup kontak ===== */
-.ct{position:fixed;inset:0;z-index:70;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(20,10,5,.35);backdrop-filter:blur(4px);opacity:0;transition:opacity .25s}
+.ct{position:fixed;inset:0;z-index:70;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(20,10,5,.4);backdrop-filter:blur(4px);opacity:0;transition:opacity .25s}
 .ct.show{opacity:1}
-.ct-panel{position:relative;width:min(600px,100%);max-height:92vh;overflow:auto;background:#f4c542;color:#2a1d14;border-radius:48px;padding:64px 44px 40px;box-shadow:0 30px 80px rgba(0,0,0,.35);
+.ct-panel{position:relative;width:min(560px,100%);max-height:92vh;overflow:auto;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:48px;padding:36px 44px 28px;box-shadow:0 30px 80px rgba(0,0,0,.35);
   transform:translateY(30px) scale(.94);transition:transform .35s cubic-bezier(.2,.9,.25,1.1)}
 .ct.show .ct-panel{transform:none}
-.ct-x{position:absolute;top:22px;right:26px;width:38px;height:38px;border-radius:50%;border:0;background:rgba(42,29,20,.12);color:#2a1d14;font-size:16px;cursor:pointer}
-.ct-x:hover{background:rgba(42,29,20,.22)}
-.ct-lead{margin:0 0 16px;font-size:17px;line-height:1.55}
-.ct-panel h2{font-size:18px;font-weight:700;margin:36px 0 12px}
-.ct-row{display:grid;grid-template-columns:96px 1fr;gap:6px 16px;padding:16px 0;border-top:1px solid rgba(42,29,20,.2);font-size:16px}
-.ct-row span{color:rgba(42,29,20,.65)}
-.ct-row a{font-weight:700;word-break:break-all}
+.ct-x{position:absolute;top:22px;right:26px;width:38px;height:38px;border-radius:50%;border:0;background:var(--card);color:var(--fg);font-size:16px;cursor:pointer}
+.ct-x:hover{background:var(--line)}
+.ct-panel h2{font-size:22px;font-weight:800;letter-spacing:-.02em;margin:0 0 18px;padding-right:50px}
+.ct-row{display:grid;grid-template-columns:96px 1fr;gap:6px 16px;padding:16px 0;border-top:1px solid var(--line);font-size:16px;align-items:center}
+.ct-row span{color:var(--mut)}
+.ct-row a{font-weight:700;color:var(--acc);word-break:break-all}
 .ct-soc{display:flex;flex-wrap:wrap;gap:10px}
-.ct-soc a{width:40px;height:40px;border-radius:50%;background:#2a1d14;color:#f4c542;display:flex;align-items:center;justify-content:center;transition:transform .2s}
+.ct-row .ct-soc a{width:40px;height:40px;border-radius:50%;background:var(--fg);color:var(--bg);display:flex;align-items:center;justify-content:center;transition:transform .2s;text-decoration:none}
 .ct-soc a:hover{transform:translateY(-3px)}
 .ct-soc svg{width:19px;height:19px}
-.ct-btn{display:inline-block;margin-top:14px;padding:12px 26px;border-radius:99px;background:#2a1d14;color:#f4c542;text-decoration:none;font-weight:700;font-size:15px}
-@media(max-width:560px){.ct-panel{padding:60px 26px 30px;border-radius:36px}.ct-row{grid-template-columns:1fr}}
+@media(max-width:560px){.ct-panel{padding:30px 24px 22px;border-radius:36px}.ct-row{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.ct,.ct-panel{transition:none}}

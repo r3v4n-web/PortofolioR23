@@ -5,7 +5,7 @@
   // ====== DATA: edit bagian ini untuk mengisi konten ======
   const projects = [
     { tag: "Proyek Web", title: "Web Kasir", desc: "Aplikasi web untuk mencatat transaksi dan menghitung pembayaran.", color: "#7a4a24", img: "kasir.jpg", url: "#" },
-    { tag: "Aplikasi", title: "Aplikasi Mix Music", desc: "Alat mixing musik seperti DJ untuk memadukan lagu.", color: "#1c1b19", img: "mix.jpg", pos: "center", url: "#" },
+    { tag: "Aplikasi", title: "Aplikasi Mix Music", desc: "Alat mixing musik seperti DJ untuk memadukan lagu.", color: "#1c1b19", img: "mix.jpg", pos: "top left", url: "#" },
   ];
 
   // ====== DAFTAR PROYEK ======
@@ -15,7 +15,7 @@
       const tag = p.url === "#" ? "div" : "a";
       const href = p.url === "#" ? "" : ` href="${esc(p.url)}"`;
       return `<${tag} class="pj"${href} style="--c:${p.color}">
-        <div class="pj-art${p.img ? " shot" : ""}">${p.img ? `<img src="${esc(p.img)}" alt="Tampilan ${esc(p.title)}" loading="lazy"${p.pos ? ` style="object-position:${esc(p.pos)}"` : ""}>` : p.art}</div>
+        <div class="pj-art${p.img ? " shot" : ""}${p.fit ? " fit" : ""}"${p.fit ? ` style="--bgi:url('${esc(p.img)}')"` : ""}>${p.img ? `<img src="${esc(p.img)}" alt="Tampilan ${esc(p.title)}" loading="lazy"${p.pos ? ` style="object-position:${esc(p.pos)}"` : ""}>` : p.art}</div>
         <div class="pj-info"><div><small>${esc(p.tag)}</small><h3>${esc(p.title)}</h3><p>${esc(p.desc)}</p></div><span class="arrow">→</span></div>
       </${tag}>`;
     }).join("");
@@ -118,13 +118,10 @@
   ct.className = "ct"; ct.hidden = true;
   ct.innerHTML = `<div class="ct-panel" role="dialog" aria-modal="true" aria-labelledby="ct-title">
     <button class="ct-x" aria-label="Tutup kontak">✕</button>
-    <p class="ct-lead">Terbuka untuk kolaborasi, belajar bareng, atau sekadar menyapa 😀</p>
-    <p class="ct-lead">Silakan hubungi aku lewat email atau media sosial di bawah ini.</p>
     <h2 id="ct-title">Kontak</h2>
     <div class="ct-row"><span>Email</span><div><a href="mailto:${EMAIL}">${EMAIL}</a></div></div>
     <div class="ct-row"><span>Sekolah</span><div>SMKS Cendika Bangsa</div></div>
     <div class="ct-row"><span>Sosial</span><div class="ct-soc">${socialHTML}</div></div>
-    <a class="ct-btn" href="mailto:${EMAIL}">Kirim email</a>
   </div>`;
   document.body.appendChild(ct);
   let ctFrom = null;
